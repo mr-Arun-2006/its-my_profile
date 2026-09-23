@@ -732,6 +732,7 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
   const orbitCtx=orbitCanvas?orbitCanvas.getContext('2d',{alpha:true,desynchronized:true}):null;
   const heroSection=document.querySelector('.hero');
   let orbitDpr=1, orbitW=0, orbitH=0, orbitTime=0, orbitLast=0, orbitFrame=0, orbitActive=false, orbitScrolling=false;
+  const orbitFrameInterval=1000/30;
   const orbitImages=orbitIconNames.map(function(name){
     const img=new Image();
     img.src='https://cdn.simpleicons.org/'+name+'/ffffff';
@@ -742,12 +743,6 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
     {rx:.38,ry:.18,count:17,speed:0.015,offset:1.7},
     {rx:.49,ry:.24,count:18,speed:-0.010,offset:3.1}
   ];
-  const orbitStars=orbitRings.flatMap(function(ring,ri){
-    return Array.from({length:ring.count},function(_,i){
-      return {ring:ri,index:i,phase:(i/ring.count)*Math.PI*2+ring.offset};
-    });
-  });
-
   function resizeOrbitCanvas(){
     if(!orbitCanvas)return;
     orbitW=window.innerWidth;
@@ -820,10 +815,12 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
   function orbitLoop(now){
     if(!orbitActive||orbitScrolling){orbitFrame=0;return}
     if(!orbitLast)orbitLast=now;
-    const delta=Math.min(now-orbitLast,34);
-    orbitLast=now;
-    orbitTime+=delta*.001;
-    drawOrbit();
+    const delta=now-orbitLast;
+    if(delta>=orbitFrameInterval){
+      orbitTime+=Math.min(delta,50)*.001;
+      orbitLast=now;
+      drawOrbit();
+    }
     orbitFrame=requestAnimationFrame(orbitLoop);
   }
 
