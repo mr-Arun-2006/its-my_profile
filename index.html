@@ -281,6 +281,75 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
   .footer-bottom{flex-direction:column;gap:7px;margin-top:22px;padding-top:14px;font-size:.57rem}
   .magnetic{transform:none!important}.cursor-light{display:none}
 }
+
+/* Project console: content-rich graph + pipeline view */
+.project-console{height:100%;display:flex;flex-direction:column;gap:10px;color:var(--soft);font-family:"DM Sans",sans-serif}
+.console-head{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:24px}
+.console-title{font:700 .78rem Manrope,sans-serif;color:var(--text);letter-spacing:-.02em}
+.console-tag{padding:4px 7px;border:1px solid var(--line);border-radius:7px;color:var(--cyan);font:500 .47rem "DM Mono",monospace;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.console-main{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(190px,.75fr);gap:9px;min-height:0}
+.console-card{border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:12px;padding:10px;overflow:hidden;position:relative}
+.console-label{font:500 .49rem "DM Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}
+.console-chart-card{min-height:188px}
+.console-chart-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:5px}
+.console-chart-name{font:600 .58rem Manrope,sans-serif;color:var(--soft)}
+.console-chart-meta{font:500 .47rem "DM Mono",monospace;color:var(--muted);text-transform:uppercase}
+.console-chart{width:100%;height:157px;display:block}
+.console-chart .grid{stroke:rgba(255,255,255,.055);stroke-width:1}
+.console-chart .axis{stroke:rgba(255,255,255,.10);stroke-width:1}
+.console-chart .area{fill:url(#consoleFill)}
+.console-chart .line{fill:none;stroke:var(--cyan);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.console-chart .line-alt{fill:none;stroke:var(--violet);stroke-width:2;stroke-dasharray:7 6;stroke-linecap:round;stroke-linejoin:round}
+.console-chart .point{fill:var(--bg);stroke:var(--cyan);stroke-width:2}
+.console-chart .bar{fill:url(#consoleBar);rx:4}
+.console-chart .bar.alt{fill:rgba(155,123,255,.34)}
+.console-chart .candle{stroke:var(--soft);stroke-width:1.5}
+.console-chart .candle.up{fill:rgba(98,231,244,.26);stroke:var(--cyan)}
+.console-chart .candle.down{fill:rgba(255,119,190,.18);stroke:var(--pink)}
+.console-metrics{display:grid;grid-template-columns:1fr;gap:7px}
+.console-metric{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border-radius:11px;padding:10px;min-height:55px}
+.console-metric span{display:block;font:500 .47rem "DM Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.10em}
+.console-metric strong{display:block;margin-top:4px;font:800 1.02rem/1 Manrope,sans-serif;color:var(--text);letter-spacing:-.035em}
+.console-pipeline{border:1px solid var(--line);background:rgba(255,255,255,.018);border-radius:12px;padding:10px}
+.console-pipeline-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.console-pipeline-title{font:500 .49rem "DM Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}
+.console-pipeline-state{font:500 .45rem "DM Mono",monospace;color:var(--green);text-transform:uppercase;letter-spacing:.08em}
+.console-pipeline-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.pipeline-node{min-height:57px;border:1px solid var(--line);border-radius:9px;background:linear-gradient(145deg,rgba(155,123,255,.07),rgba(255,255,255,.012));padding:8px;position:relative;overflow:hidden}
+.pipeline-node::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent,rgba(255,255,255,.045),transparent);transform:translateX(-120%);animation:pipelineSweep 4.2s ease-in-out infinite}
+.pipeline-node:nth-child(2)::after{animation-delay:.35s}.pipeline-node:nth-child(3)::after{animation-delay:.7s}.pipeline-node:nth-child(4)::after{animation-delay:1.05s}
+@keyframes pipelineSweep{0%,55%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
+.pipeline-top{display:flex;justify-content:space-between;gap:5px;align-items:center}
+.pipeline-no{font:500 .43rem "DM Mono",monospace;color:var(--violet2)}
+.pipeline-state{font:500 .40rem "DM Mono",monospace;color:var(--cyan);text-transform:uppercase}
+.pipeline-node b{display:block;margin-top:6px;font:700 .56rem Manrope,sans-serif;color:var(--text)}
+.pipeline-node span{display:block;margin-top:2px;font-size:.47rem;line-height:1.35;color:var(--muted)}
+.pipeline-node.is-hot{border-color:rgba(98,231,244,.24);box-shadow:inset 0 0 0 1px rgba(98,231,244,.035)}
+.pipeline-node.is-hot .pipeline-state{color:var(--green)}
+.console-bars{display:flex;align-items:end;gap:6px;height:157px;padding:12px 8px 6px}
+.console-bars i{flex:1;display:block;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--cyan),rgba(98,231,244,.12));min-height:14px;animation:barPulse 2.6s ease-in-out infinite}
+.console-bars i:nth-child(2n){background:linear-gradient(180deg,var(--violet),rgba(155,123,255,.12));animation-delay:.12s}
+.console-bars i:nth-child(3n){animation-delay:.24s}
+@keyframes barPulse{0%,100%{transform:scaleY(.90);opacity:.76}50%{transform:scaleY(1);opacity:1}}
+.console-split{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.console-mini{border:1px solid var(--line);border-radius:9px;padding:8px;background:var(--panel2)}
+.console-mini b{display:block;font:700 .53rem Manrope,sans-serif;color:var(--text)}
+.console-mini span{display:block;margin-top:3px;font:500 .45rem "DM Mono",monospace;color:var(--muted)}
+.console-code{font:500 .46rem/1.65 "DM Mono",monospace;color:var(--muted);white-space:pre-wrap}
+.console-code em{color:var(--cyan);font-style:normal}
+.console-foot{margin-top:auto;display:flex;justify-content:space-between;gap:8px;color:var(--muted);font:500 .43rem "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:720px){
+  .console-main{grid-template-columns:1fr}
+  .console-chart-card{min-height:158px}
+  .console-chart{height:126px}
+  .console-metrics{grid-template-columns:repeat(3,1fr)}
+  .console-metric{min-height:52px;padding:8px}
+  .console-metric strong{font-size:.78rem}
+  .console-pipeline-grid{grid-template-columns:repeat(2,1fr)}
+  .pipeline-node{min-height:55px}
+  .console-foot{display:none}
+}
+
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}}
 </style>
 
@@ -627,7 +696,98 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
     return 'https://cdn.simpleicons.org/'+(map[name]||(''+name+'/ffffff'));
   }
   const stage=document.getElementById('projectStage');
-  const dashboardTemplates={"marketdx":"<div class=\"dash dash-market\"><div class=\"dash-head\"><span class=\"dash-title\">MarketDX · Diagnosis Console</span><span class=\"dash-tag\">EOD DIAGNOSIS</span></div><div class=\"dash-layout\"><div class=\"dash-card\"><div class=\"dash-label\">Market health</div><div class=\"market-score\"><strong>74</strong><span>health score</span></div><div class=\"dash-label\">NSE / BSE structure</div><div class=\"regime-band\"><span class=\"on\"></span><span class=\"on\"></span><span class=\"on\"></span><span></span><span></span></div><div class=\"dash-row\" style=\"margin-top:8px\"><b>Regime</b><span class=\"dash-pill\">Structured Bull</span></div><div class=\"dash-row\"><b>Stress</b><span class=\"dash-pill warn\">Moderate</span></div></div><div><div class=\"dash-card market-chart\"><div class=\"dash-label\">Index structure</div><svg viewBox=\"0 0 320 160\" preserveAspectRatio=\"none\"><path d=\"M0 122 C22 102 37 108 54 116 C72 125 82 83 104 96 C125 108 140 63 159 77 C181 92 187 52 208 61 C229 70 247 36 269 47 C289 58 300 20 320 31\" fill=\"none\" stroke=\"#9b7bff\" stroke-width=\"4\"/><path d=\"M0 122 C22 102 37 108 54 116 C72 125 82 83 104 96 C125 108 140 63 159 77 C181 92 187 52 208 61 C229 70 247 36 269 47 C289 58 300 20 320 31 L320 160 L0 160 Z\" fill=\"url(#g1)\" opacity=\".08\"/></svg></div><div class=\"dash-card\"><div class=\"dash-label\">Diagnosis pipeline</div><div class=\"spark-bars\"><i style=\"height:38%\"></i><i style=\"height:44%\"></i><i style=\"height:50%\"></i><i style=\"height:56%\"></i><i style=\"height:62%\"></i><i style=\"height:68%\"></i><i style=\"height:74%\"></i><i style=\"height:80%\"></i></div><div class=\"dash-list\"><div class=\"dash-row\"><b>Features</b><span>Ready</span></div><div class=\"dash-row\"><b>AI narrative</b><span>Ready</span></div></div></div></div></div>","trado":"<div class=\"dash dash-trado\"><div class=\"dash-head\"><span class=\"dash-title\">TradO · Trading Research Desk</span><span class=\"dash-tag\">TRADING RESEARCH</span></div><div class=\"dash-card\"><div class=\"dash-label\">NIFTY50 · technical analysis</div><div class=\"trading-chart\"><div class=\"trade-grid\"></div><svg viewBox=\"0 0 520 170\" preserveAspectRatio=\"none\"><polyline points=\"0,134 28,126 48,141 73,108 95,119 117,91 142,102 166,70 189,82 213,64 238,76 263,48 288,59 313,42 339,52 366,31 390,44 416,24 442,37 470,15 500,27 520,10\" fill=\"none\" stroke=\"#62e7f4\" stroke-width=\"3\"/><polyline points=\"0,146 60,129 120,116 180,105 240,86 300,78 360,59 420,45 520,23\" fill=\"none\" stroke=\"#9b7bff\" stroke-width=\"2\" stroke-dasharray=\"7 6\"/><g stroke=\"#f3f2f9\" opacity=\".65\"><line x1=\"38\" y1=\"110\" x2=\"38\" y2=\"125\"/><line x1=\"31\" y1=\"94\" x2=\"45\" y2=\"94\"/><line x1=\"31\" y1=\"125\" x2=\"45\" y2=\"125\"/><line x1=\"98\" y1=\"90\" x2=\"98\" y2=\"105\"/><line x1=\"91\" y1=\"76\" x2=\"105\" y2=\"76\"/><line x1=\"91\" y1=\"105\" x2=\"105\" y2=\"105\"/><line x1=\"155\" y1=\"72\" x2=\"155\" y2=\"90\"/><line x1=\"148\" y1=\"57\" x2=\"162\" y2=\"57\"/><line x1=\"148\" y1=\"90\" x2=\"162\" y2=\"90\"/><line x1=\"216\" y1=\"68\" x2=\"216\" y2=\"81\"/><line x1=\"209\" y1=\"52\" x2=\"223\" y2=\"52\"/><line x1=\"209\" y1=\"81\" x2=\"223\" y2=\"81\"/><line x1=\"272\" y1=\"51\" x2=\"272\" y2=\"66\"/><line x1=\"265\" y1=\"36\" x2=\"279\" y2=\"36\"/><line x1=\"265\" y1=\"66\" x2=\"279\" y2=\"66\"/><line x1=\"334\" y1=\"44\" x2=\"334\" y2=\"57\"/><line x1=\"327\" y1=\"29\" x2=\"341\" y2=\"29\"/><line x1=\"327\" y1=\"57\" x2=\"341\" y2=\"57\"/><line x1=\"397\" y1=\"35\" x2=\"397\" y2=\"49\"/><line x1=\"390\" y1=\"20\" x2=\"404\" y2=\"20\"/><line x1=\"390\" y1=\"49\" x2=\"404\" y2=\"49\"/><line x1=\"463\" y1=\"26\" x2=\"463\" y2=\"38\"/><line x1=\"456\" y1=\"12\" x2=\"470\" y2=\"12\"/><line x1=\"456\" y1=\"38\" x2=\"470\" y2=\"38\"/></g></svg></div><div class=\"indicator-strip\"><div class=\"indicator\"><span>EMA</span><b>Trend ↑</b></div><div class=\"indicator\"><span>RSI</span><b>62.4</b></div><div class=\"indicator\"><span>Bollinger</span><b>Upper</b></div></div></div><div class=\"signal-row\"><div class=\"signal\"><strong>78%</strong><span>Signal</span></div><div class=\"signal\"><strong>Backtest</strong><span>Regime</span></div><div class=\"signal\"><strong>Python</strong><span>Data</span></div></div><div class=\"dash-layout\" style=\"grid-template-columns:1fr 1fr\"><div class=\"dash-card\"><div class=\"dash-label\">Pattern AI</div><div class=\"dash-row\"><b>Pattern scan</b><span class=\"dash-pill violet\">ChatGPT</span></div><div class=\"dash-row\"><b>Inference</b><span class=\"dash-pill\">Ready</span></div></div><div class=\"dash-card\"><div class=\"dash-label\">Pine Script</div><div class=\"code-lines\"><i class=\"code-line\"></i><i class=\"code-line\"></i><i class=\"code-line\"></i><i class=\"code-line\"></i><i class=\"code-line\"></i></div></div></div>","tender":"<div class=\"dash dash-tender\"><div class=\"dash-head\"><span class=\"dash-title\">Tender Intelligence · Opportunity Desk</span><span class=\"dash-tag\">AI ANALYSIS</span></div><div class=\"dash-layout\"><div class=\"dash-card\"><div class=\"dash-label\">Opportunity score</div><div class=\"tender-ring\"><strong>82</strong></div><div class=\"dash-row\"><b>Match</b><span class=\"dash-pill\">High fit</span></div><div class=\"dash-row\"><b>Risk</b><span class=\"dash-pill warn\">31 / 100</span></div><div class=\"risk-bar\"><i></i></div><div class=\"dash-label\">Weighted factors</div><div class=\"tender-list\"><div><span>Eligibility</span><b>✓</b></div><div><span>Technical</span><b>✓</b></div><div><span>Deadline</span><b>3 days</b></div><div><span>Location</span><b>TN</b></div></div></div><div class=\"dash-card\"><div class=\"dash-label\">Tender pipeline</div><div class=\"dash-list\"><div class=\"dash-row\"><b>Search</b><span class=\"dash-pill\">Live SQL</span></div><div class=\"dash-row\"><b>Deduplicate</b><span class=\"dash-pill\">88%</span></div><div class=\"dash-row\"><b>Document OCR</b><span class=\"dash-pill\">Queued</span></div><div class=\"dash-row\"><b>AI analysis</b><span class=\"dash-pill violet\">Ready</span></div></div><div class=\"dash-label\" style=\"margin-top:12px\">Documents</div><div class=\"doc-stack\"><span class=\"doc-chip\">Tender.pdf</span><span class=\"doc-chip\">BOQ.xlsx</span><span class=\"doc-chip\">Terms.pdf</span></div></div></div>","dataset":"<div class=\"dash dash-dataset\"><div class=\"dash-head\"><span class=\"dash-title\">Trading Dataset Generator</span><span class=\"dash-tag\">JSONL PIPELINE</span></div><div class=\"dash-layout\"><div class=\"dash-card\"><div class=\"dash-label\">Generated examples</div><div class=\"dataset-count\">24,680 <small>rows</small></div><div class=\"dash-sub\">seed = 2006 · reproducible</div><div class=\"gen-bars\"><div class=\"gen-row\"><span>Price Action</span><div class=\"gen-track\"><i style=\"width:88%\"></i></div><b>88%</b></div><div class=\"gen-row\"><span>PineScript</span><div class=\"gen-track\"><i style=\"width:64%\"></i></div><b>64%</b></div><div class=\"gen-row\"><span>Institutional</span><div class=\"gen-track\"><i style=\"width:72%\"></i></div><b>72%</b></div></div><div class=\"category-grid\"><span>OHLC</span><span>Indicators</span><span>Signals</span></div></div><div class=\"dash-card\"><div class=\"dash-label\"><span class=\"validation-dot\"></span>JSONL validation</div><div class=\"json-view\">{ \"symbol\": <em>\"NIFTY\"</em>,\n  \"signal\": <em>\"EMA_CROSS\"</em>,\n  \"rsi\": <em>61.8</em>,\n  \"valid\": <em>true</em> }</div><div class=\"dash-list\"><div class=\"dash-row\"><b>Schema</b><span class=\"dash-pill\">Pydantic</span></div><div class=\"dash-row\"><b>Tests</b><span class=\"dash-pill\">PASS</span></div><div class=\"dash-row\"><b>API</b><span class=\"dash-pill violet\">READY</span></div></div></div></div>","finance":"<div class=\"dash dash-finance\"><div class=\"dash-head\"><span class=\"dash-title\">Finance PWA AI · SMB Finance</span><span class=\"dash-tag\">FINANCE AUTOMATION</span></div><div class=\"dash-card\"><div class=\"dash-label\">Cash position</div><div class=\"finance-total\">₹12.84L <small>+8.4%</small></div><div class=\"cash-chart\"><svg viewBox=\"0 0 520 150\" preserveAspectRatio=\"none\"><path d=\"M0 124 C40 110 58 118 88 95 C116 75 134 90 162 76 C198 58 220 87 246 68 C278 44 294 69 326 55 C354 43 382 52 413 34 C448 16 480 33 520 20\" fill=\"none\" stroke=\"#62e7f4\" stroke-width=\"4\"/><path d=\"M0 124 C40 110 58 118 88 95 C116 75 134 90 162 76 C198 58 220 87 246 68 C278 44 294 69 326 55 C354 43 382 52 413 34 C448 16 480 33 520 20 L520 150 L0 150 Z\" fill=\"#62e7f4\" opacity=\".05\"/></svg></div></div><div class=\"dash-layout\"><div class=\"dash-card\"><div class=\"dash-label\">Expense mix</div><div class=\"expense-ring\"><strong>100%</strong></div><div class=\"dash-list\"><div class=\"dash-row\"><b>Operations</b><span>38%</span></div><div class=\"dash-row\"><b>Payroll</b><span>23%</span></div><div class=\"dash-row\"><b>Marketing</b><span>18%</span></div></div></div><div class=\"dash-card\"><div class=\"dash-label\">AI forecast</div><div class=\"forecast\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class=\"fraud-row\"><span class=\"fraud-icon\">!</span><span style=\"font-size:.5rem\">1 suspicious transaction</span></div></div></div>","portfolio":"<div class=\"dash dash-portfolio\"><div class=\"dash-head\"><span class=\"dash-title\">Portfolio Analyzer</span><span class=\"dash-tag\">PORTFOLIO ANALYTICS</span></div><div class=\"dash-card\"><div class=\"portfolio-total\"><div><div class=\"dash-label\">Portfolio value</div><strong>₹8.42L</strong></div><span>+11.6%</span></div><div class=\"dash-layout\"><div><div class=\"allocation\"><strong>Mix</strong></div><div class=\"risk-scale\"><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i></i><i></i></div><div class=\"dash-sub\" style=\"margin-top:5px\">Moderate risk</div></div><div><div class=\"dash-label\">Holdings</div><div class=\"holdings\"><div class=\"holding\"><i></i><b>Equity</b><span>+14%</span></div><div class=\"holding\"><i></i><b>ETF</b><span>+9%</span></div><div class=\"holding\"><i></i><b>Cash</b><span>+4%</span></div><div class=\"holding\"><i></i><b>Debt</b><span>+6%</span></div></div></div></div></div><div class=\"csv-box\"><strong>Upload portfolio CSV</strong><span>Parse · Analyze · Visualize</span></div></div>"};
+
+  const projectVisuals={
+    marketdx:{
+      title:'MarketDX · Diagnosis Console',tag:'EOD DIAGNOSIS',state:'EOD SYSTEM VIEW',
+      metrics:[['Signal','HEALTH'],['Regime','STRUCTURED'],['Data','EOD']],
+      graphLabel:'Market health trend',graphMeta:'NSE / BSE · diagnosis',
+      graphHtml:`<svg class="console-chart" viewBox="0 0 620 190" preserveAspectRatio="none" aria-label="MarketDX diagnosis trend">
+        <defs><linearGradient id="consoleFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#62e7f4" stop-opacity=".22"/><stop offset="1" stop-color="#62e7f4" stop-opacity="0"/></linearGradient><linearGradient id="consoleBar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#9b7bff" stop-opacity=".85"/><stop offset="1" stop-color="#9b7bff" stop-opacity=".12"/></linearGradient></defs>
+        <g class="grid"><path d="M0 38H620M0 82H620M0 126H620M0 170H620"/><path d="M103 0V190M206 0V190M309 0V190M412 0V190M515 0V190"/></g>
+        <path class="area" d="M0 146 C42 131 63 141 95 121 C123 103 149 111 178 121 C214 134 235 91 263 102 C295 116 321 64 351 78 C385 95 404 51 436 64 C472 79 491 36 520 48 C553 62 579 18 620 28 L620 190 L0 190 Z"/>
+        <path class="line" d="M0 146 C42 131 63 141 95 121 C123 103 149 111 178 121 C214 134 235 91 263 102 C295 116 321 64 351 78 C385 95 404 51 436 64 C472 79 491 36 520 48 C553 62 579 18 620 28"/>
+        <circle class="point" cx="95" cy="121" r="4"/><circle class="point" cx="263" cy="102" r="4"/><circle class="point" cx="436" cy="64" r="4"/><circle class="point" cx="620" cy="28" r="5"/>
+      </svg>`,
+      pipeline:[['01','Ingest','NSE / BSE market data','READY'],['02','Validate','Clean + schema checks','PASS'],['03','Diagnose','Health + regime logic','ACTIVE'],['04','Narrate','AI-assisted interpretation','READY']]
+    },
+    trado:{
+      title:'TradO · Trading Research Desk',tag:'TRADING RESEARCH',state:'BACKTEST VIEW',
+      metrics:[['Signal','78%'],['Regime','BACKTEST'],['Data','PYTHON']],
+      graphLabel:'Price + strategy path',graphMeta:'technical analysis · research',
+      graphHtml:`<svg class="console-chart" viewBox="0 0 620 190" preserveAspectRatio="none" aria-label="TradO trading research chart">
+        <defs><linearGradient id="consoleFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#9b7bff" stop-opacity=".18"/><stop offset="1" stop-color="#9b7bff" stop-opacity="0"/></linearGradient><linearGradient id="consoleBar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#62e7f4" stop-opacity=".85"/><stop offset="1" stop-color="#62e7f4" stop-opacity=".08"/></linearGradient></defs>
+        <g class="grid"><path d="M0 38H620M0 82H620M0 126H620M0 170H620"/><path d="M103 0V190M206 0V190M309 0V190M412 0V190M515 0V190"/></g>
+        <path class="area" d="M0 150 L42 136 L76 144 L112 112 L146 124 L181 91 L217 104 L252 74 L285 89 L320 59 L355 73 L390 46 L425 58 L460 31 L495 45 L531 22 L565 35 L620 14 L620 190 L0 190 Z"/>
+        <path class="line-alt" d="M0 157 C110 142 184 120 270 97 C365 73 476 48 620 20"/>
+        <path class="line" d="M0 150 L42 136 L76 144 L112 112 L146 124 L181 91 L217 104 L252 74 L285 89 L320 59 L355 73 L390 46 L425 58 L460 31 L495 45 L531 22 L565 35 L620 14"/>
+        <g class="candle up"><line x1="112" y1="94" x2="112" y2="121"/><rect x="105" y="102" width="14" height="13" rx="2"/><line x1="252" y1="57" x2="252" y2="87"/><rect x="245" y="66" width="14" height="14" rx="2"/><line x1="390" y1="29" x2="390" y2="56"/><rect x="383" y="37" width="14" height="13" rx="2"/><line x1="531" y1="7" x2="531" y2="34"/><rect x="524" y="15" width="14" height="13" rx="2"/></g>
+        <g class="candle down"><line x1="76" y1="131" x2="76" y2="157"/><rect x="69" y="137" width="14" height="12" rx="2"/><line x1="217" y1="92" x2="217" y2="116"/><rect x="210" y="98" width="14" height="11" rx="2"/><line x1="425" y1="49" x2="425" y2="72"/><rect x="418" y="54" width="14" height="12" rx="2"/></g>
+      </svg>`,
+      pipeline:[['01','Market feed','Historical / live data','READY'],['02','Indicators','EMA · RSI · Bollinger','READY'],['03','Signal','Pattern + strategy logic','ACTIVE'],['04','Backtest','Evaluate trade path','READY']]
+    },
+    tender:{
+      title:'Tender Intelligence · Opportunity Desk',tag:'PROCUREMENT INTELLIGENCE',state:'ANALYSIS VIEW',
+      metrics:[['Signal','MATCH'],['Regime','FILTERED'],['Data','LIVE']],
+      graphLabel:'Opportunity score trend',graphMeta:'retrieval · scoring · analysis',
+      graphHtml:`<svg class="console-chart" viewBox="0 0 620 190" preserveAspectRatio="none" aria-label="Tender opportunity score chart">
+        <defs><linearGradient id="consoleFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff77be" stop-opacity=".18"/><stop offset="1" stop-color="#ff77be" stop-opacity="0"/></linearGradient><linearGradient id="consoleBar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff77be" stop-opacity=".82"/><stop offset="1" stop-color="#ff77be" stop-opacity=".10"/></linearGradient></defs>
+        <g class="grid"><path d="M0 38H620M0 82H620M0 126H620M0 170H620"/><path d="M103 0V190M206 0V190M309 0V190M412 0V190M515 0V190"/></g>
+        <rect class="bar" x="28" y="118" width="52" height="52"/><rect class="bar" x="111" y="95" width="52" height="75"/><rect class="bar alt" x="194" y="72" width="52" height="98"/><rect class="bar" x="277" y="83" width="52" height="87"/><rect class="bar" x="360" y="54" width="52" height="116"/><rect class="bar alt" x="443" y="37" width="52" height="133"/><rect class="bar" x="526" y="22" width="52" height="148"/>
+        <path class="line" d="M54 112 C123 94 189 80 220 77 C290 76 362 50 469 34 C512 30 548 20 578 16"/>
+      </svg>`,
+      pipeline:[['01','Search','Live tender retrieval','ACTIVE'],['02','Dedup','Remove repeated tenders','PASS'],['03','OCR','Extract document text','QUEUED'],['04','AI analysis','Score + explain fit','READY']]
+    },
+    dataset:{
+      title:'Dataset Generator · Data Lab',tag:'DATA GENERATION',state:'GENERATION VIEW',
+      metrics:[['Signal','JSONL'],['Regime','AUTO'],['Data','TRAIN']],
+      graphLabel:'Generation throughput',graphMeta:'seeded · reproducible · validated',
+      graphHtml:`<svg class="console-chart" viewBox="0 0 620 190" preserveAspectRatio="none" aria-label="Dataset generation throughput chart">
+        <defs><linearGradient id="consoleFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#9b7bff" stop-opacity=".16"/><stop offset="1" stop-color="#9b7bff" stop-opacity="0"/></linearGradient><linearGradient id="consoleBar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#62e7f4" stop-opacity=".88"/><stop offset="1" stop-color="#62e7f4" stop-opacity=".08"/></linearGradient></defs>
+        <g class="grid"><path d="M0 38H620M0 82H620M0 126H620M0 170H620"/><path d="M103 0V190M206 0V190M309 0V190M412 0V190M515 0V190"/></g>
+        <rect class="bar" x="20" y="122" width="44" height="48"/><rect class="bar" x="94" y="108" width="44" height="62"/><rect class="bar alt" x="168" y="93" width="44" height="77"/><rect class="bar" x="242" y="77" width="44" height="93"/><rect class="bar" x="316" y="63" width="44" height="107"/><rect class="bar alt" x="390" y="44" width="44" height="126"/><rect class="bar" x="464" y="30" width="44" height="140"/><rect class="bar" x="538" y="18" width="44" height="152"/>
+        <path class="line-alt" d="M42 132 C123 119 195 98 278 83 C360 64 442 48 580 24"/>
+      </svg>`,
+      pipeline:[['01','Generate','OHLC + signals + patterns','ACTIVE'],['02','Features','Price action + PineScript','READY'],['03','Validate','Pydantic + pytest checks','PASS'],['04','Export','Structured JSONL output','READY']]
+    },
+    finance:{
+      title:'Finance PWA AI · Cashflow Console',tag:'FINANCE AUTOMATION',state:'FORECAST VIEW',
+      metrics:[['Signal','AI'],['Regime','FORECAST'],['Data','CASHFLOW']],
+      graphLabel:'Cash-flow trajectory',graphMeta:'transactions · forecast · risk',
+      graphHtml:`<svg class="console-chart" viewBox="0 0 620 190" preserveAspectRatio="none" aria-label="Finance cash flow forecast chart">
+        <defs><linearGradient id="consoleFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#62e7f4" stop-opacity=".20"/><stop offset="1" stop-color="#62e7f4" stop-opacity="0"/></linearGradient><linearGradient id="consoleBar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#73e0a4" stop-opacity=".85"/><stop offset="1" stop-color="#73e0a4" stop-opacity=".08"/></linearGradient></defs>
+        <g class="grid"><path d="M0 38H620M0 82H620M0 126H620M0 170H620"/><path d="M103 0V190M206 0V190M309 0V190M412 0V190M515 0V190"/></g>
+        <path class="area" d="M0 150 C45 138 69 146 105 127 C140 108 168 120 203 111 C239 102 259 76 293 88 C331 101 359 65 390 75 C429 88 451 47 482 58 C520 70 552 33 582 42 C597 47 610 31 620 26 L620 190 L0 190 Z"/>
+        <path class="line" d="M0 150 C45 138 69 146 105 127 C140 108 168 120 203 111 C239 102 259 76 293 88 C331 101 359 65 390 75 C429 88 451 47 482 58 C520 70 552 33 582 42 C597 47 610 31 620 26"/>
+        <path class="line-alt" d="M390 88 C445 76 496 66 620 38"/>
+      </svg>`,
+      pipeline:[['01','Transactions','CSV / bank inputs','READY'],['02','Categorize','AI expense tagging','ACTIVE'],['03','Forecast','Cash-flow prediction','READY'],['04','Fraud scan','Suspicious pattern check','READY']]
+    },
+    portfolio:{
+      title:'Portfolio Analyzer · Wealth View',tag:'PORTFOLIO ANALYTICS',state:'ANALYSIS VIEW',
+      metrics:[['Signal','ANALYZE'],['Regime','BALANCED'],['Data','CSV']],
+      graphLabel:'Portfolio value path',graphMeta:'upload · allocation · analysis',
+      graphHtml:`<svg class="console-chart" viewBox="0 0 620 190" preserveAspectRatio="none" aria-label="Portfolio analyzer value chart">
+        <defs><linearGradient id="consoleFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#9b7bff" stop-opacity=".20"/><stop offset="1" stop-color="#9b7bff" stop-opacity="0"/></linearGradient><linearGradient id="consoleBar" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#9b7bff" stop-opacity=".84"/><stop offset="1" stop-color="#9b7bff" stop-opacity=".08"/></linearGradient></defs>
+        <g class="grid"><path d="M0 38H620M0 82H620M0 126H620M0 170H620"/><path d="M103 0V190M206 0V190M309 0V190M412 0V190M515 0V190"/></g>
+        <path class="area" d="M0 148 C35 135 67 142 102 126 C139 109 158 118 196 107 C233 96 258 105 290 84 C326 62 349 81 381 68 C420 51 441 59 474 44 C514 25 546 41 575 27 C593 18 607 20 620 12 L620 190 L0 190 Z"/>
+        <path class="line" d="M0 148 C35 135 67 142 102 126 C139 109 158 118 196 107 C233 96 258 105 290 84 C326 62 349 81 381 68 C420 51 441 59 474 44 C514 25 546 41 575 27 C593 18 607 20 620 12"/>
+        <circle class="point" cx="102" cy="126" r="4"/><circle class="point" cx="290" cy="84" r="4"/><circle class="point" cx="474" cy="44" r="4"/><circle class="point" cx="620" cy="12" r="5"/>
+      </svg>`,
+      pipeline:[['01','Upload','Portfolio CSV input','READY'],['02','Parse','Holdings + values','PASS'],['03','Analyze','Allocation + risk view','ACTIVE'],['04','Visualize','Financial insight layer','READY']]
+    }
+  };
+
+  function buildProjectConsole(visual){
+    const metricHtml=visual.metrics.map(function(m){
+      return '<div class="console-metric"><span>'+m[0]+'</span><strong>'+m[1]+'</strong></div>';
+    }).join('');
+    const pipelineHtml=visual.pipeline.map(function(item,i){
+      return '<div class="pipeline-node '+(i===2?'is-hot':'')+'"><div class="pipeline-top"><span class="pipeline-no">'+item[0]+'</span><span class="pipeline-state">'+item[3]+'</span></div><b>'+item[1]+'</b><span>'+item[2]+'</span></div>';
+    }).join('');
+    return '<div class="project-console"><div class="console-head"><span class="console-title">'+visual.title+'</span><span class="console-tag">'+visual.tag+'</span></div><div class="console-main"><div class="console-card console-chart-card"><div class="console-chart-top"><div><div class="console-label">'+visual.graphLabel+'</div><div class="console-chart-name">'+visual.graphMeta+'</div></div><span class="console-chart-meta">LIVE VISUAL</span></div>'+visual.graphHtml+'</div><div class="console-metrics">'+metricHtml+'</div></div><div class="console-pipeline"><div class="console-pipeline-head"><span class="console-pipeline-title">Pipeline activity</span><span class="console-pipeline-state">'+visual.state+'</span></div><div class="console-pipeline-grid">'+pipelineHtml+'</div></div><div class="console-foot"><span>system visual · project content driven</span><span>select another project to update</span></div></div>';
+  }
+
   function renderProject(index){
     const p=projectData[index];
     stage.classList.remove('swap');void stage.offsetWidth;stage.classList.add('swap');
@@ -644,7 +804,7 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
       const img=document.createElement('img');img.src=iconUrl(name);img.alt=p.labels[j]||name;s.appendChild(img);strip.appendChild(s);
     });
     const mock=document.getElementById('mockScreen');
-    mock.innerHTML=dashboardTemplates[p.view]||dashboardTemplates.marketdx;
+    mock.innerHTML=buildProjectConsole(projectVisuals[p.view]||projectVisuals.marketdx);
     requestAnimationFrame(function(){
       mock.querySelectorAll('.dash').forEach(function(el){el.classList.add('dashboard-enter')});
     });
