@@ -256,11 +256,11 @@ header.site-nav{
 .edu-stages{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .edu-stage{text-align:center;position:relative;opacity:.55;transform:translateY(5px);transition:.5s var(--ease)}
 .edu-stage.active{opacity:1;transform:none}
-.edu-stage-photo{width:76px;height:76px;margin:-82px auto 10px;border-radius:22px;position:relative;z-index:4;padding:3px;background:linear-gradient(135deg,var(--violet),var(--cyan));box-shadow:0 14px 35px rgba(0,0,0,.32),0 0 28px rgba(155,123,255,.16);opacity:0;transform:translateY(12px) scale(.88);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.edu-stage-photo{width:76px;height:76px;position:absolute;left:50%;top:-82px;z-index:8;padding:3px;border-radius:22px;background:linear-gradient(135deg,var(--violet),var(--cyan));box-shadow:0 14px 35px rgba(0,0,0,.32),0 0 28px rgba(155,123,255,.16);opacity:0;transform:translateX(-50%) translateY(12px) scale(.88);transition:opacity .65s var(--ease),transform .65s var(--ease);pointer-events:none}
 .edu-stage-photo::after{content:"";position:absolute;inset:-7px;border:1px solid rgba(155,123,255,.22);border-radius:28px;animation:eduPhotoPulse 3.2s ease-in-out infinite;pointer-events:none}
 .edu-stage-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 22%;border-radius:19px}
-.edu-stage.active .edu-stage-photo{opacity:1;transform:none}
-.edu-stage.current .edu-stage-photo{opacity:1;transform:none;box-shadow:0 16px 42px rgba(0,0,0,.38),0 0 34px rgba(98,231,244,.18)}
+.edu-stage.active .edu-stage-photo{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+.edu-stage.current .edu-stage-photo{opacity:1;transform:translateX(-50%) translateY(0) scale(1);box-shadow:0 16px 42px rgba(0,0,0,.38),0 0 34px rgba(98,231,244,.18)}
 @keyframes eduPhotoPulse{0%,100%{transform:scale(.98);opacity:.4}50%{transform:scale(1.04);opacity:.9}}
 
 .edu-dot{width:22px;height:22px;margin:-29px auto 8px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);position:relative;z-index:2}
@@ -328,7 +328,7 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
   .career-tags{gap:4px;margin-top:7px}.career-tag{padding:3px 5px;font-size:.41rem}
   .edu-top{gap:8px}.edu-year{font-size:.46rem;padding:5px 6px}.edu-card h3{font-size:1rem}.edu-card p{font-size:.68rem;line-height:1.55}.edu-score{font-size:.55rem;margin-top:13px}
   .edu-progress{margin-top:19px;padding-top:24px}.edu-progress-line{left:10%;right:10%;top:9px}.edu-progress-fill{width:66%}.edu-dot{width:18px;height:18px;margin:-24px auto 6px}
-  .edu-stage-photo{width:58px;height:58px;margin:-64px auto 7px;border-radius:18px}.edu-stage-photo img{border-radius:15px}
+  .edu-stage-photo{width:58px;height:58px;top:-68px;border-radius:18px}.edu-stage-photo img{border-radius:15px}
   .edu-stage b{font-size:.58rem}.edu-stage span{font-size:.42rem}
   .achieve-row{grid-template-columns:1fr 1fr;gap:6px;margin-top:14px}.achieve{padding:9px;border-radius:9px}
   .achieve b{font-size:.60rem}.achieve span{font-size:.52rem;line-height:1.45}
