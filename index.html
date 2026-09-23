@@ -103,7 +103,8 @@ header.site-nav{
 @keyframes breath{0%,100%{box-shadow:0 0 0 6px rgba(115,224,164,.06)}50%{box-shadow:0 0 0 10px rgba(115,224,164,0)}}
 .hero h1{font:800 clamp(3.45rem,7vw,7rem)/.93 Manrope,sans-serif;letter-spacing:-.075em;max-width:850px}
 .hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--text),var(--violet2) 75%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-sub{margin:25px 0 28px;max-width:590px;font-size:1.02rem;color:var(--soft)}
+.hero-sub{margin:22px 0 28px;max-width:590px;color:var(--soft)}
+.hero-role-line{display:flex;align-items:center;flex-wrap:wrap;gap:9px;font:600 clamp(1rem,2vw,1.35rem) Manrope,sans-serif;letter-spacing:-.02em;color:var(--soft);overflow:hidden}.hero-role-word{display:inline-block;opacity:0;transform:translateY(22px);filter:blur(8px);animation:heroWord .75s var(--ease) forwards}.hero-role-word:nth-child(1){animation-delay:.18s}.hero-role-word:nth-child(2){animation-delay:.34s}.hero-role-word:nth-child(3){animation-delay:.50s}.hero-role-sep{color:var(--violet2);opacity:.6;animation:heroSep 1s ease both}.hero-flow{display:inline-flex;align-items:center;gap:7px;margin-top:13px;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025);font:500 .62rem "DM Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);opacity:0;animation:heroFlow .9s .75s var(--ease) forwards}.hero-flow i{width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan);animation:flowDot 1.6s ease-in-out infinite}.hero-flow i:nth-of-type(2){animation-delay:.35s;background:var(--violet)}.hero-flow i:nth-of-type(3){animation-delay:.7s;background:var(--pink)}@keyframes heroWord{to{opacity:1;transform:none;filter:none}}@keyframes heroSep{from{opacity:0;transform:scaleX(0)}to{opacity:.6;transform:scaleX(1)}}@keyframes heroFlow{from{opacity:0;transform:translateY(12px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}@keyframes flowDot{0%,100%{transform:scale(.7);opacity:.45}50%{transform:scale(1.25);opacity:1}}
 .hero-sub strong{color:var(--text)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px}
 .btn{
@@ -279,7 +280,14 @@ footer{padding:46px 0 56px;border-top:1px solid var(--line);position:relative;ov
     <div class="reveal">
       <div class="hero-kicker"><span class="pulse-dot"></span>Final-year CSE · Data · Finance · AI</div>
       <h1>Arun <em>K.</em></h1>
-      <p class="hero-sub"><strong>Data Engineer · FinTech Engineer · AI/ML Builder</strong><br>Building practical systems from data to intelligence.</p>
+      <div class="hero-role-line" aria-label="Professional roles">
+        <span class="hero-role-word">Data Engineer</span><span class="hero-role-sep">·</span>
+        <span class="hero-role-word">FinTech Engineer</span><span class="hero-role-sep">·</span>
+        <span class="hero-role-word">AI/ML Builder</span>
+      </div>
+      <div class="hero-flow" aria-label="Focus areas">
+        <i></i><span>DATA</span><i></i><span>FINANCE</span><i></i><span>AI</span>
+      </div>
       <div class="hero-actions">
         <a class="btn btn-primary magnetic" href="#work">Explore work →</a>
         <a class="btn btn-secondary magnetic" href="./Arun_K_Resume_2026.pdf" download="Arun_K_Resume_2026.pdf">Download resume ↓</a>
